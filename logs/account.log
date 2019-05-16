@@ -1,0 +1,22 @@
+2019/05/14 13:16:11.582 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 13:16:11.582 [E]  initSec err:sql: unknown driver "mysql" (forgotten import?)
+2019/05/14 13:17:24.508 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 13:17:24.508 [E]  initSec err:sql: unknown driver "mysql" (forgotten import?)
+2019/05/14 13:18:24.628 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 13:18:24.628 [D]  init sec success
+2019/05/14 13:18:24.628 [D]  CreateNewUser nickName: testnick
+2019/05/14 13:19:39.905 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 13:19:40.029 [D]  init sec success
+2019/05/14 13:19:40.030 [D]  CreateNewUser nickName: testnick
+2019/05/14 14:59:49.416 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 14:59:49.416 [D]  init sec success
+2019/05/14 14:59:49.417 [D]  CreateNewUser nickName: testnick
+2019/05/14 15:01:29.687 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 15:01:29.687 [D]  init sec success
+2019/05/14 15:01:29.688 [D]  CreateNewUser nickName: testnick
+2019/05/14 15:01:49.246 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 15:01:49.246 [D]  init sec success
+2019/05/14 15:01:49.247 [D]  CreateNewUser nickName: testnick
+2019/05/14 15:02:13.560 [D]  root:root@tcp(localhost:3306)/fish
+2019/05/14 15:02:13.560 [D]  init sec success
+2019/05/14 15:02:13.560 [D]  CreateNewUser nickName: testnick
