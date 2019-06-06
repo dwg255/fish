@@ -246,7 +246,7 @@ func BuildFishArray() (ret *FishArrayRet) {
 				FishId:    generateFishId(),
 				Speed:     0,
 			})
-			fishArray[1] = append(fishArray[0],&ArrayFish{
+			fishArray[1] = append(fishArray[1],&ArrayFish{
 				FishKind:  kind,
 				TraceKind: 0,
 				FishId:    generateFishId(),
