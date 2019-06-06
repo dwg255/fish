@@ -16,6 +16,9 @@ require (
 	github.com/garyburd/redigo v1.6.0
 	github.com/go-redis/redis v6.15.2+incompatible
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/golang/go v0.0.0-20190523013941-3e9d8e2e1bb9 // indirect
 	github.com/gorilla/websocket v1.4.0
 	github.com/jmoiron/sqlx v1.2.0
+	github.com/orestonce/ChessGame v0.0.0-20190419000812-8e1a70c446b3 // indirect
+	golang.org/x/net v0.0.0-20181114220301-adae6a3d119a
 )

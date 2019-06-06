@@ -2,8 +2,16 @@ namespace go rpc
 
 enum ErrorCode{
     Success=0
-    UnknownError=5000,
+    ServerError=5000,
     VerifyError=5001,
+    UserNotExists=5002,
+}
+
+enum ModifyPropType{
+    gems = 0
+    roomId = 1
+    power = 2
+    ice = 3
 }
 
 struct UserInfo{
@@ -21,6 +29,8 @@ struct UserInfo{
      12: i8 reNameCount
      13: i8 reHeadCount
      14: string registerDate
+     15: i64 ice
+     16: string token
 }
 
 struct Result{
@@ -31,14 +41,14 @@ struct Result{
 service UserService {
 
     Result createNewUser(1: string nickName 2:string avatarAuto 3: i64 gold )//初始金币
-
     //获取用户信息 BY userId
     Result getUserInfoById(1:i32 userId)
 
     //获取用户信息 BY token
-    Result getUserInfoByken(1:string token)
+    Result getUserInfoByToken(1:string token)
 
     //修改用户金币
-    Result modifyGoldById(1:string behavior, 2:i32 userId, 3:i64 gold)
-    Result modifyGoldByToken(1:string behavior, 2:string token,3:i64 gold)
+    Result modifyUserInfoById(1:string behavior, 2:i32 userId, 3: ModifyPropType propType, 4: i64 incr)
+    Result RenameUserById(1:i32 userId,2:string NewName)
+    string getMessage(1 :string messageType)
 }

@@ -13,11 +13,12 @@ var (
 )
 
 type AccountServiceConf struct {
-	ThriftPort int
-	LogPath    string
-	LogLevel   string
-	RedisConf  *RedisConf
-	MysqlConf  *MysqlConf
+	AccountAesKey string
+	ThriftPort    int
+	LogPath       string
+	LogLevel      string
+	RedisConf     *RedisConf
+	MysqlConf     *MysqlConf
 }
 
 type RedisConf struct {

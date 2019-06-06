@@ -4,19 +4,25 @@ import (
 	"fish/account/common"
 	"fmt"
 	"github.com/astaxie/beego/config"
+	"github.com/astaxie/beego/logs"
 )
 
 func initConf() (err error) {
-	conf,err := config.NewConfig("ini","./common/conf/account.conf")
+	conf, err := config.NewConfig("ini", "./common/conf/account.conf")
 	if err != nil {
-		fmt.Println("new config failed,err:",err)
+		fmt.Println("new config failed,err:", err)
 		return
 	}
 
-	common.AccountConf.ThriftPort,err = conf.Int("thrift_port")
+	common.AccountConf.ThriftPort, err = conf.Int("account_port")
 	if err != nil {
 		return
 	}
+	common.AccountConf.AccountAesKey = conf.String("account_aes_key")
+	if common.AccountConf.AccountAesKey == "" || len(common.AccountConf.AccountAesKey) < 16 {
+		return fmt.Errorf("conf err: invalid account_aes_key :%v", common.AccountConf.AccountAesKey)
+	}
+	logs.Debug("account_aes_key :%v",common.AccountConf.AccountAesKey)
 
 	common.AccountConf.LogPath = conf.String("log_path")
 	if common.AccountConf.LogPath == "" {

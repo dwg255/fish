@@ -2,9 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"fish/game/common"
+	"fish/hall/common"
 	"github.com/astaxie/beego/logs"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 func conversionLogLevel(logLevel string) int {
@@ -23,8 +22,8 @@ func conversionLogLevel(logLevel string) int {
 
 func initLogger() (err error) {
 	config := make(map[string]interface{})
-	config["filename"] = common.GameConf.LogPath
-	config["level"] = conversionLogLevel(common.GameConf.LogLevel)
+	config["filename"] = common.HallConf.LogPath
+	config["level"] = conversionLogLevel(common.HallConf.LogLevel)
 
 	configStr, err := json.Marshal(config)
 	if err != nil {

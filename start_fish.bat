@@ -1,0 +1,2 @@
+call fish.exe
+pause

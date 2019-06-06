@@ -78,9 +78,9 @@ func initSec() (err error) {
 		return
 	}
 
-	err = initMysql()
+	/*err = initMysql()
 	if err != nil {
 		return
-	}
+	}*/
 	return
 }

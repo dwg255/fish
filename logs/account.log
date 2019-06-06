@@ -1,22 +1,33 @@
-2019/05/14 13:16:11.582 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 13:16:11.582 [E]  initSec err:sql: unknown driver "mysql" (forgotten import?)
-2019/05/14 13:17:24.508 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 13:17:24.508 [E]  initSec err:sql: unknown driver "mysql" (forgotten import?)
-2019/05/14 13:18:24.628 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 13:18:24.628 [D]  init sec success
-2019/05/14 13:18:24.628 [D]  CreateNewUser nickName: testnick
-2019/05/14 13:19:39.905 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 13:19:40.029 [D]  init sec success
-2019/05/14 13:19:40.030 [D]  CreateNewUser nickName: testnick
-2019/05/14 14:59:49.416 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 14:59:49.416 [D]  init sec success
-2019/05/14 14:59:49.417 [D]  CreateNewUser nickName: testnick
-2019/05/14 15:01:29.687 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 15:01:29.687 [D]  init sec success
-2019/05/14 15:01:29.688 [D]  CreateNewUser nickName: testnick
-2019/05/14 15:01:49.246 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 15:01:49.246 [D]  init sec success
-2019/05/14 15:01:49.247 [D]  CreateNewUser nickName: testnick
-2019/05/14 15:02:13.560 [D]  root:root@tcp(localhost:3306)/fish
-2019/05/14 15:02:13.560 [D]  init sec success
-2019/05/14 15:02:13.560 [D]  CreateNewUser nickName: testnick
+2019/06/05 18:03:40.595 [D]  init sec success
+2019/06/05 18:03:40.596 [D]  account server :4000
+2019/06/05 18:03:46.340 [D]  CreateNewUser nickName: 袁易轩
+2019/06/05 18:03:46.662 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:03:46.662 [D]  GetUserInfoById: 25
+2019/06/05 18:03:46.876 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:03:46.876 [D]  GetUserInfoById: 25
+2019/06/05 18:03:46.880 [D]  GetMessage messageType: notice
+2019/06/05 18:03:46.886 [D]  GetMessage messageType: fkgm
+2019/06/05 18:03:47.448 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:03:47.449 [D]  GetUserInfoById: 25
+2019/06/05 18:03:47.527 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:03:47.527 [D]  GetUserInfoById: 25
+2019/06/05 18:04:04.628 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/05 18:04:04.628 [D]  GetUserInfoById: 25
+2019/06/05 18:04:04.628 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/05 18:04:04.629 [D]  GetUserInfoById: 25
+2019/06/05 18:04:04.693 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:04:04.693 [D]  GetUserInfoById: 25
+2019/06/05 18:04:04.694 [D]  GetMessage messageType: notice
+2019/06/05 18:04:04.699 [D]  GetMessage messageType: fkgm
+2019/06/05 18:04:17.748 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:04:17.748 [D]  GetUserInfoById: 25
+2019/06/05 18:04:17.793 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:04:17.793 [D]  GetUserInfoById: 25
+2019/06/05 18:04:43.697 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/05 18:04:43.697 [D]  GetUserInfoById: 25
+2019/06/05 18:04:43.699 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/05 18:04:43.702 [D]  GetUserInfoById: 25
+2019/06/05 18:04:43.768 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
+2019/06/05 18:04:43.768 [D]  GetUserInfoById: 25
+2019/06/05 18:04:43.769 [D]  GetMessage messageType: notice
+2019/06/05 18:04:43.773 [D]  GetMessage messageType: fkgm

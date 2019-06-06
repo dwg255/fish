@@ -1,0 +1,2 @@
+call account.exe
+pause

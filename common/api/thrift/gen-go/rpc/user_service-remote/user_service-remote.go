@@ -14,7 +14,7 @@ import (
         "strconv"
         "strings"
         "github.com/apache/thrift/lib/go/thrift"
-        "fish/common/api/thrift/gen-go/rpc"
+        "rpc"
 )
 
 
@@ -24,9 +24,10 @@ func Usage() {
   fmt.Fprintln(os.Stderr, "\nFunctions:")
   fmt.Fprintln(os.Stderr, "  Result createNewUser(string nickName, string avatarAuto, i64 gold)")
   fmt.Fprintln(os.Stderr, "  Result getUserInfoById(i32 userId)")
-  fmt.Fprintln(os.Stderr, "  Result getUserInfoByken(string token)")
-  fmt.Fprintln(os.Stderr, "  Result modifyGoldById(string behavior, i32 userId, i64 gold)")
-  fmt.Fprintln(os.Stderr, "  Result modifyGoldByToken(string behavior, string token, i64 gold)")
+  fmt.Fprintln(os.Stderr, "  Result getUserInfoByToken(string token)")
+  fmt.Fprintln(os.Stderr, "  Result modifyUserInfoById(string behavior, i32 userId, ModifyPropType propType, i64 incr)")
+  fmt.Fprintln(os.Stderr, "  Result RenameUserById(i32 userId, string NewName)")
+  fmt.Fprintln(os.Stderr, "  string getMessage(string messageType)")
   fmt.Fprintln(os.Stderr)
   os.Exit(0)
 }
@@ -157,8 +158,8 @@ func main() {
     value0 := argvalue0
     argvalue1 := flag.Arg(2)
     value1 := argvalue1
-    argvalue2, err14 := (strconv.ParseInt(flag.Arg(3), 10, 64))
-    if err14 != nil {
+    argvalue2, err16 := (strconv.ParseInt(flag.Arg(3), 10, 64))
+    if err16 != nil {
       Usage()
       return
     }
@@ -171,8 +172,8 @@ func main() {
       fmt.Fprintln(os.Stderr, "GetUserInfoById requires 1 args")
       flag.Usage()
     }
-    tmp0, err15 := (strconv.Atoi(flag.Arg(1)))
-    if err15 != nil {
+    tmp0, err17 := (strconv.Atoi(flag.Arg(1)))
+    if err17 != nil {
       Usage()
       return
     }
@@ -181,55 +182,71 @@ func main() {
     fmt.Print(client.GetUserInfoById(context.Background(), value0))
     fmt.Print("\n")
     break
-  case "getUserInfoByken":
+  case "getUserInfoByToken":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprintln(os.Stderr, "GetUserInfoByken requires 1 args")
+      fmt.Fprintln(os.Stderr, "GetUserInfoByToken requires 1 args")
       flag.Usage()
     }
     argvalue0 := flag.Arg(1)
     value0 := argvalue0
-    fmt.Print(client.GetUserInfoByken(context.Background(), value0))
+    fmt.Print(client.GetUserInfoByToken(context.Background(), value0))
     fmt.Print("\n")
     break
-  case "modifyGoldById":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprintln(os.Stderr, "ModifyGoldById requires 3 args")
+  case "modifyUserInfoById":
+    if flag.NArg() - 1 != 4 {
+      fmt.Fprintln(os.Stderr, "ModifyUserInfoById requires 4 args")
       flag.Usage()
     }
     argvalue0 := flag.Arg(1)
     value0 := argvalue0
-    tmp1, err18 := (strconv.Atoi(flag.Arg(2)))
-    if err18 != nil {
+    tmp1, err20 := (strconv.Atoi(flag.Arg(2)))
+    if err20 != nil {
       Usage()
       return
     }
     argvalue1 := int32(tmp1)
     value1 := argvalue1
-    argvalue2, err19 := (strconv.ParseInt(flag.Arg(3), 10, 64))
-    if err19 != nil {
+    tmp2, err := (strconv.Atoi(flag.Arg(3)))
+    if err != nil {
+      Usage()
+     return
+    }
+    argvalue2 := rpc.ModifyPropType(tmp2)
+    value2 := argvalue2
+    argvalue3, err21 := (strconv.ParseInt(flag.Arg(4), 10, 64))
+    if err21 != nil {
       Usage()
       return
     }
-    value2 := argvalue2
-    fmt.Print(client.ModifyGoldById(context.Background(), value0, value1, value2))
+    value3 := argvalue3
+    fmt.Print(client.ModifyUserInfoById(context.Background(), value0, value1, value2, value3))
     fmt.Print("\n")
     break
-  case "modifyGoldByToken":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprintln(os.Stderr, "ModifyGoldByToken requires 3 args")
+  case "RenameUserById":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprintln(os.Stderr, "RenameUserById requires 2 args")
       flag.Usage()
     }
-    argvalue0 := flag.Arg(1)
-    value0 := argvalue0
-    argvalue1 := flag.Arg(2)
-    value1 := argvalue1
-    argvalue2, err22 := (strconv.ParseInt(flag.Arg(3), 10, 64))
+    tmp0, err22 := (strconv.Atoi(flag.Arg(1)))
     if err22 != nil {
       Usage()
       return
     }
-    value2 := argvalue2
-    fmt.Print(client.ModifyGoldByToken(context.Background(), value0, value1, value2))
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    argvalue1 := flag.Arg(2)
+    value1 := argvalue1
+    fmt.Print(client.RenameUserById(context.Background(), value0, value1))
+    fmt.Print("\n")
+    break
+  case "getMessage":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprintln(os.Stderr, "GetMessage requires 1 args")
+      flag.Usage()
+    }
+    argvalue0 := flag.Arg(1)
+    value0 := argvalue0
+    fmt.Print(client.GetMessage(context.Background(), value0))
     fmt.Print("\n")
     break
   case "":
