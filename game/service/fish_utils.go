@@ -275,8 +275,8 @@ func BuildFishArray() (ret *FishArrayRet) {
 func IsHit(f *Fish) bool {
 	rand.Seed(time.Now().UnixNano())
 	// todo 调整概率
-	//return rand.Intn(GetFishMulti(f)) == 0
-	return rand.Intn(GetFishMulti(f)*3/5) == 0
+	return rand.Intn(GetFishMulti(f)) == 0
+	//return rand.Intn(GetFishMulti(f)*3/5) == 0
 	//return true
 }
 

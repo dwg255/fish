@@ -13,6 +13,7 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -247,7 +248,7 @@ func (c *Client) Fire(bullet *Bullet) {
 
 	c.UserInfo.Score -= c.Room.Conf.BaseScore * GetBulletMulti(bullet.BulletKind)
 	c.UserInfo.Bill -= c.Room.Conf.BaseScore * GetBulletMulti(bullet.BulletKind)
-	addPower, _ := strconv.ParseFloat(fmt.Sprintf("%.5f", float64(GetBulletMulti(bullet.BulletKind))/1000), 64)
+	addPower, _ := strconv.ParseFloat(fmt.Sprintf("%.5f", float64(GetBulletMulti(bullet.BulletKind))/3000), 64)
 	if c.UserInfo.Power < 1 {
 		c.UserInfo.Power += addPower
 	}
@@ -272,9 +273,9 @@ func (c *Client) catchFish(fishId FishId, bulletId BulletId) {
 					for _, fish := range killedFishes {
 						addScore += GetFishMulti(fish) * GetBulletMulti(bullet.BulletKind) * c.Room.Conf.BaseScore
 					}
-					//if addScore > c.Room.Conf.BaseScore*100 {
-					//	addScore = c.Room.Conf.BaseScore * 100
-					//}
+					if addScore > c.Room.Conf.BaseScore*100/1000 {
+						addScore = c.Room.Conf.BaseScore * 100 / 1000
+					}
 					c.UserInfo.Score += addScore
 					c.UserInfo.Bill += addScore //记账
 					//todo %1的概率获取冰冻道具
@@ -283,14 +284,17 @@ func (c *Client) catchFish(fishId FishId, bulletId BulletId) {
 					if rand.Intn(100) == 0 {
 						item = "ice"
 					}
-
+					fishes := make([]string, 0)
+					for _, fish := range killedFishes {
+						fishes = append(fishes, strconv.Itoa(int(fish.FishId)))
+					}
 					catchFishAddScore, _ := strconv.ParseFloat(fmt.Sprintf("%.5f", float64(addScore)/1000), 64)
 					catchResult := []interface{}{"catch_fish_reply",
 						map[string]interface{}{
 							"userId":   c.UserInfo.UserId,
 							"chairId":  bullet.ChairId,
 							"bulletId": bullet.BulletId,
-							"fishId":   strconv.Itoa(int(fish.FishId)),
+							"fishId":   strings.Join(fishes, ","),
 							"addScore": catchFishAddScore,
 							"item":     item,
 						}}
@@ -365,4 +369,6 @@ func (c *Client) clearBill() {
 			}
 		}
 	}(c.UserInfo.UserId, c.UserInfo.Bill, c.Room.RoomId, c.UserInfo.Power*1000)
+	// 不允许其他协程修改client，默认结算成功。如果需要确认，可以在房间加结算消息chan。
+	c.UserInfo.Bill = 0
 }

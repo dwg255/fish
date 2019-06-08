@@ -314,16 +314,21 @@ func handleUserRequest(clientReq *clientReqData) {
 				killedFishes := make([]string, 0)
 				addScore := 0
 				for _, fishStr := range fishIdStrArr {
-					if fishIdInt, err := strconv.Atoi(fishStr); err != nil {
+					if fishIdInt, err := strconv.Atoi(fishStr); err == nil {
 						fishId := FishId(fishIdInt)
 						if fish, ok := client.Room.AliveFish[fishId]; ok {
 							killedFishes = append(killedFishes, strconv.Itoa(int(fish.FishId)))
 							//加钱
-							addScore += GetFishMulti(fish) * GetBulletMulti(BulletKind["bullet_kind_laser"]) * client.Room.Conf.BaseScore
+							addScore += GetFishMulti(fish) * GetBulletMulti(BulletKind["bullet_kind_laser"]) * client.Room.Conf.BaseScore / 1000
 						} else {
 							logs.Debug("user [%v] laser_catch_fish fishId [%v] not in alive fish array...", client.UserInfo.UserId, fishId)
 						}
+					} else {
+						logs.Error("laser_catch_fish err : fishId [%v] err", fishStr)
 					}
+				}
+				if addScore > client.Room.Conf.BaseScore*100 / 1000 { //最大100倍
+					addScore = client.Room.Conf.BaseScore * 100
 				}
 				client.UserInfo.Score += addScore
 				client.UserInfo.Bill += addScore //记账
@@ -337,6 +342,8 @@ func handleUserRequest(clientReq *clientReqData) {
 						"isLaser":  true,
 					},
 				})
+			} else {
+				logs.Error("laser_catch_fish err : %v", err)
 			}
 		case "user_lock_fish":
 			if len(reqJson) < 2 {
@@ -386,7 +393,7 @@ func handleUserRequest(clientReq *clientReqData) {
 			}
 			client.sendMsg(append([]byte{'4', '2'}, jsonByte...))
 			client.sendMsg([]byte{'4', '1'})
-			clientExit(client)
+			clientExit(client, false)
 
 		case "dispress":
 		case "disconnect":
@@ -399,13 +406,14 @@ func handleUserRequest(clientReq *clientReqData) {
 			client.sendMsg(append([]byte{'4', '2'}, jsonByte...))
 		case "client_exit":
 			if client.UserInfo.Online {
-				clientExit(client)
+				clientExit(client, true)
 			}
 		}
 	}
 }
 
-func clientExit(client *Client) {
+func clientExit(client *Client, closeClient bool) {
+	logs.Debug("user %v exit close client: %v ...", client.UserInfo.UserId, closeClient)
 	if client.UserInfo.Bill != 0 {
 		client.clearBill()
 	}
@@ -423,8 +431,10 @@ func clientExit(client *Client) {
 		}
 		roomInfo.UserInfo = roomUserIdArr
 		delete(client.Room.Users, client.UserInfo.UserId)
-		client.closeChan <- true
-		close(client.closeChan) //关闭channel不影响取出关闭前传送的数据，继续取将得到零值  :-)
+		if closeClient {
+			client.closeChan <- true
+			close(client.closeChan) //关闭channel不影响取出关闭前传送的数据，继续取将得到零值  :-)
+		}
 		if len(client.Room.Users) == 0 { //房间无人，消除房间
 			delete(RoomMgr.RoomsInfo, client.Room.RoomId)
 			delete(RoomMgr.Rooms, client.Room.RoomId)

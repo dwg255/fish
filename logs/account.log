@@ -1,33 +1,81 @@
-2019/06/05 18:03:40.595 [D]  init sec success
-2019/06/05 18:03:40.596 [D]  account server :4000
-2019/06/05 18:03:46.340 [D]  CreateNewUser nickName: 袁易轩
-2019/06/05 18:03:46.662 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:03:46.662 [D]  GetUserInfoById: 25
-2019/06/05 18:03:46.876 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:03:46.876 [D]  GetUserInfoById: 25
-2019/06/05 18:03:46.880 [D]  GetMessage messageType: notice
-2019/06/05 18:03:46.886 [D]  GetMessage messageType: fkgm
-2019/06/05 18:03:47.448 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:03:47.449 [D]  GetUserInfoById: 25
-2019/06/05 18:03:47.527 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:03:47.527 [D]  GetUserInfoById: 25
-2019/06/05 18:04:04.628 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
-2019/06/05 18:04:04.628 [D]  GetUserInfoById: 25
-2019/06/05 18:04:04.628 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
-2019/06/05 18:04:04.629 [D]  GetUserInfoById: 25
-2019/06/05 18:04:04.693 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:04:04.693 [D]  GetUserInfoById: 25
-2019/06/05 18:04:04.694 [D]  GetMessage messageType: notice
-2019/06/05 18:04:04.699 [D]  GetMessage messageType: fkgm
-2019/06/05 18:04:17.748 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:04:17.748 [D]  GetUserInfoById: 25
-2019/06/05 18:04:17.793 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:04:17.793 [D]  GetUserInfoById: 25
-2019/06/05 18:04:43.697 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
-2019/06/05 18:04:43.697 [D]  GetUserInfoById: 25
-2019/06/05 18:04:43.699 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
-2019/06/05 18:04:43.702 [D]  GetUserInfoById: 25
-2019/06/05 18:04:43.768 [D]  GetUserInfoByToken: d92da5e5c0b74fa414d3688aa5
-2019/06/05 18:04:43.768 [D]  GetUserInfoById: 25
-2019/06/05 18:04:43.769 [D]  GetMessage messageType: notice
-2019/06/05 18:04:43.773 [D]  GetMessage messageType: fkgm
+2019/06/07 22:01:01.164 [D]  init sec success
+2019/06/07 22:01:01.164 [D]  account server :4000
+2019/06/07 22:01:06.198 [D]  CreateNewUser nickName: 施美欣
+2019/06/07 22:01:06.527 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:06.527 [D]  GetUserInfoById: 36
+2019/06/07 22:01:06.777 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:06.777 [D]  GetUserInfoById: 36
+2019/06/07 22:01:06.780 [D]  GetMessage messageType: notice
+2019/06/07 22:01:06.781 [D]  GetMessage messageType: fkgm
+2019/06/07 22:01:07.747 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:07.747 [D]  GetUserInfoById: 36
+2019/06/07 22:01:07.794 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:07.794 [D]  GetUserInfoById: 36
+2019/06/07 22:01:11.462 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:11.462 [D]  GetUserInfoById: 36
+2019/06/07 22:01:11.464 [D]  GetMessage messageType: notice
+2019/06/07 22:01:11.465 [D]  GetMessage messageType: fkgm
+2019/06/07 22:01:11.657 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:11.657 [D]  GetUserInfoById: 36
+2019/06/07 22:01:11.658 [D]  GetMessage messageType: notice
+2019/06/07 22:01:11.660 [D]  GetMessage messageType: fkgm
+2019/06/07 22:01:21.317 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:21.317 [D]  GetUserInfoById: 36
+2019/06/07 22:01:21.344 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:01:21.344 [D]  GetUserInfoById: 36
+2019/06/07 22:08:21.033 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/07 22:08:21.114 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:21.114 [D]  GetUserInfoById: 36
+2019/06/07 22:08:21.115 [D]  GetMessage messageType: notice
+2019/06/07 22:08:21.119 [D]  GetMessage messageType: fkgm
+2019/06/07 22:08:21.262 [D]  GetMessage messageType: notice
+2019/06/07 22:08:21.263 [D]  GetMessage messageType: fkgm
+2019/06/07 22:08:21.423 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:21.423 [D]  GetUserInfoById: 36
+2019/06/07 22:08:22.991 [D]  GetUserInfoById: 36
+2019/06/07 22:08:22.992 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/07 22:08:22.997 [D]  GetUserInfoById: 36
+2019/06/07 22:08:27.163 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:27.163 [D]  GetUserInfoById: 36
+2019/06/07 22:08:27.197 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:27.197 [D]  GetUserInfoById: 36
+2019/06/07 22:08:46.995 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/07 22:08:46.996 [D]  GetUserInfoById: 36
+2019/06/07 22:08:46.998 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/07 22:08:46.999 [D]  GetUserInfoById: 36
+2019/06/07 22:08:47.083 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:47.083 [D]  GetUserInfoById: 36
+2019/06/07 22:08:47.084 [D]  GetMessage messageType: notice
+2019/06/07 22:08:47.088 [D]  GetMessage messageType: fkgm
+2019/06/07 22:08:47.288 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:47.288 [D]  GetUserInfoById: 36
+2019/06/07 22:08:47.289 [D]  GetMessage messageType: notice
+2019/06/07 22:08:47.296 [D]  GetMessage messageType: fkgm
+2019/06/07 22:08:48.919 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:48.919 [D]  GetUserInfoById: 36
+2019/06/07 22:08:48.945 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:08:48.945 [D]  GetUserInfoById: 36
+2019/06/07 22:09:00.169 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/07 22:09:00.170 [D]  GetUserInfoById: 36
+2019/06/07 22:09:00.171 [D]  ModifyUserInfoById: FISH_GAME_MODIFY
+2019/06/07 22:09:00.177 [D]  GetUserInfoById: 36
+2019/06/07 22:09:00.251 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:09:00.251 [D]  GetUserInfoById: 36
+2019/06/07 22:09:00.253 [D]  GetMessage messageType: notice
+2019/06/07 22:09:00.254 [D]  GetMessage messageType: fkgm
+2019/06/07 22:09:00.380 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:09:00.381 [D]  GetUserInfoById: 36
+2019/06/07 22:09:00.383 [D]  GetMessage messageType: notice
+2019/06/07 22:09:00.386 [D]  GetMessage messageType: fkgm
+2019/06/07 22:09:01.111 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:09:01.112 [D]  GetUserInfoById: 36
+2019/06/07 22:09:01.139 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:09:01.139 [D]  GetUserInfoById: 36
+2019/06/07 22:09:04.234 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:09:04.234 [D]  GetUserInfoById: 36
+2019/06/07 22:09:04.235 [D]  GetMessage messageType: notice
+2019/06/07 22:09:04.238 [D]  GetMessage messageType: fkgm
+2019/06/07 22:09:04.372 [D]  GetUserInfoByToken: d82ea5e5c0b74faa17dc688ea5
+2019/06/07 22:09:04.372 [D]  GetUserInfoById: 36
+2019/06/07 22:09:04.374 [D]  GetMessage messageType: notice
+2019/06/07 22:09:04.375 [D]  GetMessage messageType: fkgm

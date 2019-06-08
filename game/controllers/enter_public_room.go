@@ -129,7 +129,7 @@ func EnterPublicRoom(w http.ResponseWriter, r *http.Request) {
 								SeatIndex:  0,
 								Vip:        int(res.UserObj.Vip),
 								CannonKind: cannonKindVip[int(res.UserObj.Vip)],
-								Power:      float64(res.UserObj.Power),
+								Power:      float64(res.UserObj.Power) / 1000,
 								LockFishId: 0,
 							}, ErrChan: resChan,
 						}
