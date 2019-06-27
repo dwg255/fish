@@ -13,7 +13,7 @@
     go build -o hall.exe hall\main\main.go hall\main\init.go hall\main\config.go
     go build -o fish.exe game\main\main.go game\main\init.go game\main\config.go
 
-2.启动:
-    浏览器访问 http://localhost
+4.在线示例:
+     http://fish.blzz.shop
 
 
