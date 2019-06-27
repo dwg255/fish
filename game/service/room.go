@@ -220,7 +220,7 @@ func (room *room) begin() {
 				return
 			case <-room.fishArrayEndTimer:
 				room.Status = GameStatusFree
-				room.AliveFish = make(map[FishId]*Fish) //清理鱼
+				//room.AliveFish = make(map[FishId]*Fish) //清理鱼,因为时间有可能不同步，所以结束也不清理鱼
 				room.Utils.RestartBuildFish <- true
 			case <-room.frozenEndTimer:
 				room.Status = GameStatusFree

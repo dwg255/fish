@@ -14,6 +14,13 @@ enum ModifyPropType{
     ice = 3
 }
 
+struct qqInfo{
+    1:string openId
+    2:string figureUrl
+    3:string province
+    4:string city
+    5:i64 totalSpending
+}
 struct UserInfo{
      1: i64 userId
      2: string userName
@@ -31,6 +38,7 @@ struct UserInfo{
      14: string registerDate
      15: i64 ice
      16: string token
+     17: qqInfo qqInfo
 }
 
 struct Result{
@@ -40,8 +48,16 @@ struct Result{
 
 service UserService {
 
+    //创建临时用户
     Result createNewUser(1: string nickName 2:string avatarAuto 3: i64 gold )//初始金币
-    //获取用户信息 BY userId
+
+    //创建QQ用户
+    Result createQQUser(1: UserInfo UserInfo)
+
+    //使用openId获取用户
+    Result getUserInfoByOpenId(1:string openId)
+
+   //获取用户信息 BY userId
     Result getUserInfoById(1:i32 userId)
 
     //获取用户信息 BY token

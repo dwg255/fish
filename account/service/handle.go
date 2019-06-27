@@ -28,6 +28,77 @@ func InitAesTool() {
 	}
 }
 
+func (p *UserServer) GetUserInfoByOpenId(ctx context.Context, openId string) (r *rpc.Result_, err error) {
+	logs.Debug("getUserInfoByOpenId openId: %v", openId)
+	var existsUserId string
+	var userId int
+	if existsUserId, err = redisConf.RedisPool.HGet(redisConf.RedisKeyPrefix+"open_id2user_id", openId).Result(); err == nil {
+		if userId, err = strconv.Atoi(existsUserId); err == nil {
+			return p.GetUserInfoById(ctx, int32(userId))
+		}
+	} else {
+		r = &rpc.Result_{
+			Code: rpc.ErrorCode_UserNotExists,
+		}
+		err = fmt.Errorf("user openId=%v not exists", openId)
+	}
+	return
+}
+
+func (p *UserServer) CreateQQUser(ctx context.Context, userInfo *rpc.UserInfo) (r *rpc.Result_, err error) {
+	logs.Debug("CreateQQUser nickName: %v", userInfo.NickName)
+	var nextUserId int64
+	var existsUserId string
+	var userId int
+	if existsUserId, err = redisConf.RedisPool.HGet(redisConf.RedisKeyPrefix+"open_id2user_id", userInfo.QqInfo.OpenId).Result(); err == nil {
+		if userId, err = strconv.Atoi(existsUserId); err == nil {
+			return p.GetUserInfoById(ctx, int32(userId))
+		}
+	} else {
+		nextUserId, err = redisConf.RedisPool.Incr(redisConf.RedisKeyPrefix + "userId").Result()
+		token := ""
+		registerTime := time.Now()
+		if token, err = aesTool.Encrypt(strconv.Itoa(int(nextUserId)) + "-" + strconv.Itoa(int(registerTime.Unix()))); err == nil {
+			rand.Seed(time.Now().UnixNano())
+			userInfoRedisMap := map[string]interface{}{
+				"UserId":        nextUserId,
+				"UserName":      userInfo.UserName,
+				"NickName":      userInfo.NickName,
+				"Sex":           userInfo.Sex,
+				"HeadImg":       userInfo.HeadImg,
+				"Lv":            userInfo.Lv,
+				"Exp":           userInfo.Exp,
+				"Vip":           userInfo.Vip, //VIP级别随机给吧,
+				"Gems":          userInfo.Gems,
+				"RoomId":        0,
+				"Power":         userInfo.Power,
+				"ReNameCount":   userInfo.ReNameCount,
+				"ReHeadCount":   userInfo.ReHeadCount,
+				"RegisterDate":  registerTime.Format("2006-01-02 15:04:05"),
+				"Ice":           10,
+				"Token":         token,
+				"openId":        userInfo.QqInfo.OpenId,
+				"FigureUrl":     userInfo.QqInfo.FigureUrl,
+				"Province":      userInfo.QqInfo.Province,
+				"City":          userInfo.QqInfo.City,
+				"TotalSpending": userInfo.QqInfo.TotalSpending,
+			}
+			if _, err = redisConf.RedisPool.HMSet(redisConf.RedisKeyPrefix+strconv.Itoa(int(nextUserId)), userInfoRedisMap).Result(); err == nil {
+				if _, err = redisConf.RedisPool.HSet(redisConf.RedisKeyPrefix+"open_id2user_id", userInfo.QqInfo.OpenId, nextUserId).Result(); err == nil {
+					userInfo.UserId = nextUserId
+					userInfo.Token = token
+					r = &rpc.Result_{
+						Code:    rpc.ErrorCode_Success,
+						UserObj: userInfo,
+					}
+					return
+				}
+			}
+		}
+	}
+	return
+}
+
 func (p *UserServer) CreateNewUser(ctx context.Context, nickName string, avatarAuto string, gold int64) (r *rpc.Result_, err error) {
 	logs.Debug("CreateNewUser nickName: %v", nickName)
 	var nextUserId int64
@@ -171,6 +242,7 @@ func (p *UserServer) ModifyUserInfoById(ctx context.Context, behavior string, us
 	}
 	return
 }
+
 func (p *UserServer) GetMessage(ctx context.Context, messageType string) (r string, err error) {
 	logs.Debug("GetMessage messageType: %v", messageType)
 	var redisErr error

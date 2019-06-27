@@ -6,6 +6,7 @@ import (
 	"fish/common/api/thrift/gen-go/rpc"
 	"fish/common/tools"
 	"fish/hall/common"
+	"fmt"
 	"github.com/astaxie/beego/logs"
 	"math/rand"
 	"net/http"
@@ -14,9 +15,73 @@ import (
 )
 
 func Guest(w http.ResponseWriter, r *http.Request) {
-	defer func() {
+	//defer func() {
+	//	if r := recover(); r != nil {
+	//		logs.Error("Guest panic:%v ", r)
+	//	}
+	//}()
+
+	sign := r.FormValue("sign")
+	if len(sign) == 0 || sign == "null" {
+		qqLoginUrl := fmt.Sprintf("https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=%d&redirect_uri=%s&state=1", appId, redirectUri)
+		ret := map[string]interface{}{
+			"errcode": 1,
+			"qqLoginUrl": qqLoginUrl,
+		}
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		data, err := json.Marshal(ret)
+		if err != nil {
+			logs.Error("json marsha1 failed err:%v", err)
+			return
+		}
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		if _, err := w.Write(data); err != nil {
+			logs.Error("CreateRoom err: %v", err)
+		}
+	} else {
+		rand.Seed(time.Now().UnixNano())
+		//account = firstName[rand.Intn(len(firstName)-1)] + secondName[rand.Intn(len(secondName)-1)]
+		if client, closeTransportHandler, err := tools.GetRpcClient(common.HallConf.AccountHost, strconv.Itoa(common.HallConf.AccountPort)); err == nil {
+			defer func() {
+				if err := closeTransportHandler(); err != nil {
+					logs.Error("close rpc err: %v", err)
+				}
+			}()
+			if r, err := client.GetUserInfoByToken(context.Background(), sign); err == nil {
+				if r.Code == rpc.ErrorCode_Success {
+					sign = r.UserObj.Token
+				}
+				ret := map[string]interface{}{
+					"errcode": 0,
+					"errmsg":  "ok",
+					//"account":  "guest_" + account,
+					"account":  r.UserObj.NickName,
+					"halladdr": common.HallConf.HallHost + ":" + strconv.Itoa(common.HallConf.HallPort),
+					"sign":     sign,
+				}
+				defer func() {
+					data, err := json.Marshal(ret)
+					if err != nil {
+						logs.Error("json marsha1 failed err:%v", err)
+						return
+					}
+					w.Header().Set("Access-Control-Allow-Origin", "*")
+					if _, err := w.Write(data); err != nil {
+						logs.Error("CreateRoom err: %v", err)
+					}
+				}()
+			} else {
+				logs.Error("call rpc Guest err: %v", err)
+			}
+
+		} else {
+			logs.Error("get rpc client err: %v", err)
+		}
+	}
+
+	/*defer func() {
 		if r := recover(); r != nil {
-			logs.Error("GetUserInfo panic:%v ", r)
+			logs.Error("Guest panic:%v ", r)
 		}
 	}()
 	//logs.Debug("new request url:[%s]",r.URL)
@@ -61,7 +126,7 @@ func Guest(w http.ResponseWriter, r *http.Request) {
 		}()
 	} else {
 		logs.Error("get rpc client err: %v", err)
-	}
+	}*/
 }
 
 var (

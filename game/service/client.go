@@ -273,9 +273,10 @@ func (c *Client) catchFish(fishId FishId, bulletId BulletId) {
 					for _, fish := range killedFishes {
 						addScore += GetFishMulti(fish) * GetBulletMulti(bullet.BulletKind) * c.Room.Conf.BaseScore
 					}
-					if addScore > c.Room.Conf.BaseScore*100/1000 {
-						addScore = c.Room.Conf.BaseScore * 100 / 1000
-					}
+					//if addScore > c.Room.Conf.BaseScore*200 { //不允许超过200倍
+					//	logs.Error("user %v catch fish kind [%v] add score = %v,base score = %v ,beyond 200 time of base score...", c.UserInfo.UserId, fish.FishKind, addScore, c.Room.Conf.BaseScore)
+					//	addScore = c.Room.Conf.BaseScore * 200
+					//}
 					c.UserInfo.Score += addScore
 					c.UserInfo.Bill += addScore //记账
 					//todo %1的概率获取冰冻道具
@@ -299,6 +300,7 @@ func (c *Client) catchFish(fishId FishId, bulletId BulletId) {
 							"item":     item,
 						}}
 					c.Room.broadcast(catchResult)
+					//logs.Debug("catch fish add score %v,catchFishAddScore %v", addScore, catchFishAddScore)
 					for _, fish := range killedFishes {
 						delete(c.Room.AliveFish, fish.FishId)
 					}
@@ -316,10 +318,6 @@ func (c *Client) catchFish(fishId FishId, bulletId BulletId) {
 		//客户端会多传命中，愚蠢的客户端
 		//logs.Debug("user [%v] catch fish bullet [%v] not exists ...", c.UserInfo.UserId, bulletId)
 	}
-}
-
-func (c *Client) laserCatchFish(data map[interface{}]interface{}) { //激光炮
-
 }
 
 func (c *Client) frozenScene(startTime time.Time) { //冰冻屏幕

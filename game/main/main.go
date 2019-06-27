@@ -66,11 +66,11 @@ func main() {
 				Url.RawQuery = params.Encode()
 				urlPath := Url.String()
 				resp, err := http.Get(urlPath)
-				defer resp.Body.Close()
 				s, err := ioutil.ReadAll(resp.Body)
 				if string(s) != "success" {
 					logs.Info("register game server response:", string(s))
 				}
+				_ = resp.Body.Close()
 			}
 		}
 	}()

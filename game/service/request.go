@@ -108,10 +108,6 @@ func wsRequest(req []byte, client *Client) {
 
 //todo 弱类型语言写的东西重构简直堪比火葬场
 func handleUserRequest(clientReq *clientReqData) {
-	//logs.Debug("handle user request %v",clientReq.reqData)
-	//logs.Debug("handle user request %v", clientReq.reqData)
-	//logs.Debug("handle user request %v", clientReq.reqData[1])
-
 	reqJson := clientReq.reqData
 	client := clientReq.client
 	if len(reqJson) > 0 {
@@ -125,8 +121,6 @@ func handleUserRequest(clientReq *clientReqData) {
 			reqData := make(map[string]interface{})
 			if err := json.Unmarshal([]byte(reqJson[1]), &reqData); err == nil {
 				token := reqData["sign"]
-				//time := reqData["time"]
-				//sign := reqData["token"]
 				if token, ok := token.(string); ok {
 					logs.Debug("token %v", token)
 					if rpcClient, closeTransportHandler, err := tools.GetRpcClient(common.GameConf.AccountHost, strconv.Itoa(common.GameConf.AccountPort)); err == nil {
@@ -139,8 +133,6 @@ func handleUserRequest(clientReq *clientReqData) {
 							//logs.Debug("rpc res : %v", res.Code)
 							if res.Code == rpc.ErrorCode_Success {
 								userId := UserId(res.UserObj.UserId)
-								//["login"
-								// "{"token":"009f78c5c34693f94a5ba8529bcb6984","roomId":"556020","time":1558952436801,"sign":"89c474579fd571934d394ffdf2b77e88"}"
 								for _, userInfo := range client.Room.Users {
 									if userId == userInfo.UserId {
 										userInfo.client = client
@@ -219,13 +211,8 @@ func handleUserRequest(clientReq *clientReqData) {
 			//42["catch_fish","{\"userId\":101,\"chairId\":1,\"bulletId\":\"1_324965\",\"fishId\":\"10318923\",\"sign\":\"8bfef2b82dc7b97e4ad386ec40b83d2b\"}"]
 			catchFishReq := catchFishReq{}
 			if err := json.Unmarshal([]byte(reqJson[1]), &catchFishReq); err == nil {
-				//if fishIdInt, err := strconv.Atoi(catchFishReq.FishId); err != nil {
-				//	fishId := FishId(fishIdInt)
 				bulletId := catchFishReq.BulletId
 				client.catchFish(catchFishReq.FishId, bulletId)
-				//} else {
-				//	logs.Error("catch_fish req err: fishId [%v] err", catchFishReq.FishId)
-				//}
 			} else {
 				logs.Error("catch_fish req err: %v", err)
 			}
@@ -300,8 +287,6 @@ func handleUserRequest(clientReq *clientReqData) {
 				logs.Error("user fire json err: %v", err)
 			}
 		case "laser_catch_fish":
-			//42["laser_catch_fish","{\"userId\":105,\"chairId\":1,\"fishes\":\"10219766-2219862\",\"sign\":\"cf498f06ac20c534d23d8289bc805591\"}"]
-			//42["laser_catch_fish","{\"userId\":16,\"chairId\":1,\"fishes\":\"2-5-6-7-8-16-29\",\"sign\":\"79ed22fe693d7f02355fa443cd0b35c7\"}"]
 			if len(reqJson) < 2 {
 				return
 			}
@@ -319,7 +304,7 @@ func handleUserRequest(clientReq *clientReqData) {
 						if fish, ok := client.Room.AliveFish[fishId]; ok {
 							killedFishes = append(killedFishes, strconv.Itoa(int(fish.FishId)))
 							//加钱
-							addScore += GetFishMulti(fish) * GetBulletMulti(BulletKind["bullet_kind_laser"]) * client.Room.Conf.BaseScore / 1000
+							addScore += GetFishMulti(fish) * GetBulletMulti(BulletKind["bullet_kind_laser"]) * client.Room.Conf.BaseScore
 						} else {
 							logs.Debug("user [%v] laser_catch_fish fishId [%v] not in alive fish array...", client.UserInfo.UserId, fishId)
 						}
@@ -327,18 +312,19 @@ func handleUserRequest(clientReq *clientReqData) {
 						logs.Error("laser_catch_fish err : fishId [%v] err", fishStr)
 					}
 				}
-				if addScore > client.Room.Conf.BaseScore*100 / 1000 { //最大100倍
-					addScore = client.Room.Conf.BaseScore * 100
-				}
+				//if addScore > client.Room.Conf.BaseScore*200 { //最大200倍
+				//	addScore = client.Room.Conf.BaseScore * 200
+				//}
 				client.UserInfo.Score += addScore
 				client.UserInfo.Bill += addScore //记账
+				catchFishAddScore, _ := strconv.ParseFloat(fmt.Sprintf("%.5f", float64(addScore)/1000), 64)
 				client.Room.broadcast([]interface{}{
 					"catch_fish_reply",
 					map[string]interface{}{
 						"userId":   laserCatchReq.UserId,
 						"chairId":  laserCatchReq.ChairId,
 						"fishId":   strings.Join(killedFishes, ","),
-						"addScore": addScore,
+						"addScore": catchFishAddScore,
 						"isLaser":  true,
 					},
 				})

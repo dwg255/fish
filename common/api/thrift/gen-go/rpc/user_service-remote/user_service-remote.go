@@ -23,6 +23,8 @@ func Usage() {
   flag.PrintDefaults()
   fmt.Fprintln(os.Stderr, "\nFunctions:")
   fmt.Fprintln(os.Stderr, "  Result createNewUser(string nickName, string avatarAuto, i64 gold)")
+  fmt.Fprintln(os.Stderr, "  Result createQQUser(UserInfo UserInfo)")
+  fmt.Fprintln(os.Stderr, "  Result getUserInfoByOpenId(string openId)")
   fmt.Fprintln(os.Stderr, "  Result getUserInfoById(i32 userId)")
   fmt.Fprintln(os.Stderr, "  Result getUserInfoByToken(string token)")
   fmt.Fprintln(os.Stderr, "  Result modifyUserInfoById(string behavior, i32 userId, ModifyPropType propType, i64 incr)")
@@ -158,8 +160,8 @@ func main() {
     value0 := argvalue0
     argvalue1 := flag.Arg(2)
     value1 := argvalue1
-    argvalue2, err16 := (strconv.ParseInt(flag.Arg(3), 10, 64))
-    if err16 != nil {
+    argvalue2, err20 := (strconv.ParseInt(flag.Arg(3), 10, 64))
+    if err20 != nil {
       Usage()
       return
     }
@@ -167,13 +169,48 @@ func main() {
     fmt.Print(client.CreateNewUser(context.Background(), value0, value1, value2))
     fmt.Print("\n")
     break
+  case "createQQUser":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprintln(os.Stderr, "CreateQQUser requires 1 args")
+      flag.Usage()
+    }
+    arg21 := flag.Arg(1)
+    mbTrans22 := thrift.NewTMemoryBufferLen(len(arg21))
+    defer mbTrans22.Close()
+    _, err23 := mbTrans22.WriteString(arg21)
+    if err23 != nil {
+      Usage()
+      return
+    }
+    factory24 := thrift.NewTJSONProtocolFactory()
+    jsProt25 := factory24.GetProtocol(mbTrans22)
+    argvalue0 := rpc.NewUserInfo()
+    err26 := argvalue0.Read(jsProt25)
+    if err26 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
+    fmt.Print(client.CreateQQUser(context.Background(), value0))
+    fmt.Print("\n")
+    break
+  case "getUserInfoByOpenId":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprintln(os.Stderr, "GetUserInfoByOpenId requires 1 args")
+      flag.Usage()
+    }
+    argvalue0 := flag.Arg(1)
+    value0 := argvalue0
+    fmt.Print(client.GetUserInfoByOpenId(context.Background(), value0))
+    fmt.Print("\n")
+    break
   case "getUserInfoById":
     if flag.NArg() - 1 != 1 {
       fmt.Fprintln(os.Stderr, "GetUserInfoById requires 1 args")
       flag.Usage()
     }
-    tmp0, err17 := (strconv.Atoi(flag.Arg(1)))
-    if err17 != nil {
+    tmp0, err28 := (strconv.Atoi(flag.Arg(1)))
+    if err28 != nil {
       Usage()
       return
     }
@@ -199,8 +236,8 @@ func main() {
     }
     argvalue0 := flag.Arg(1)
     value0 := argvalue0
-    tmp1, err20 := (strconv.Atoi(flag.Arg(2)))
-    if err20 != nil {
+    tmp1, err31 := (strconv.Atoi(flag.Arg(2)))
+    if err31 != nil {
       Usage()
       return
     }
@@ -213,8 +250,8 @@ func main() {
     }
     argvalue2 := rpc.ModifyPropType(tmp2)
     value2 := argvalue2
-    argvalue3, err21 := (strconv.ParseInt(flag.Arg(4), 10, 64))
-    if err21 != nil {
+    argvalue3, err32 := (strconv.ParseInt(flag.Arg(4), 10, 64))
+    if err32 != nil {
       Usage()
       return
     }
@@ -227,8 +264,8 @@ func main() {
       fmt.Fprintln(os.Stderr, "RenameUserById requires 2 args")
       flag.Usage()
     }
-    tmp0, err22 := (strconv.Atoi(flag.Arg(1)))
-    if err22 != nil {
+    tmp0, err33 := (strconv.Atoi(flag.Arg(1)))
+    if err33 != nil {
       Usage()
       return
     }

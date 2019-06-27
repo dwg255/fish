@@ -13,4 +13,8 @@ type HallServiceConf struct {
 	LogPath     string
 	LogLevel    string
 	Version     string
+
+	AppId       int		//qq登录
+	AppKey      string
+	RedirectUri string
 }

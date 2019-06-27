@@ -58,5 +58,18 @@ func initConf() (err error) {
 		return
 	}
 
+	common.HallConf.AppId, err = accountConf.Int("app_id")
+	if err != nil {
+		return
+	}
+	common.HallConf.AppKey = conf.String("app_key")
+	if common.HallConf.AppKey == "" {
+		return fmt.Errorf("conf err: app_key is null")
+	}
+	common.HallConf.RedirectUri = conf.String("redirect_uri")
+	if common.HallConf.RedirectUri == "" {
+		return fmt.Errorf("conf err: redirect_uri is null")
+	}
+
 	return
 }
