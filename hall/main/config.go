@@ -20,7 +20,7 @@ func initConf() (err error) {
 
 	common.HallConf.HallPort, err = conf.Int("hall_port")
 	if err != nil {
-		return
+		return fmt.Errorf("conf err: hall_port is null")
 	}
 
 	common.HallConf.HallSecret = conf.String("hall_secret")
@@ -55,12 +55,12 @@ func initConf() (err error) {
 
 	common.HallConf.AccountPort, err = accountConf.Int("account_port")
 	if err != nil {
-		return
+		return  fmt.Errorf("conf err: account_port is null")
 	}
 
-	common.HallConf.AppId, err = accountConf.Int("app_id")
+	common.HallConf.AppId, err = conf.Int("app_id")
 	if err != nil {
-		return
+		return fmt.Errorf("conf err: app_id is null")
 	}
 	common.HallConf.AppKey = conf.String("app_key")
 	if common.HallConf.AppKey == "" {
