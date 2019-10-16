@@ -17,6 +17,7 @@
     tar -zxvf fish.tar.gz /var/www/html/client/fish
 
 4.配置nginx:
+```
     server {
         listen       80;
         server_name  fish.com;
@@ -28,14 +29,13 @@
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_pass http://127.0.0.1:9000;
         }
-
         location / {
             root /var/www/html/client/fish;
             add_header Access-Control-Allow-Origin *;
             expires 7d;
         }
     }
-
+```
     
 5.在线示例:
      http://fish.blzz.shop
