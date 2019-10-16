@@ -36,8 +36,24 @@
         }
     }
 ```
-    
+     配置文件位置 /common/conf 内含redis配置和qq第三方登录配置，请自行修改。
+
 5.在线示例:
      http://fish.blzz.shop
+    
+---
 
+License
 
+This project is released under the terms of the MIT license. See [LICENSE](LICENSE) for more
+information or see https://opensource.org/licenses/MIT.
+   
+   
+---
+
+![](https://raw.githubusercontent.com/dwg255/fish/master/client/1.jpg)
+![](https://raw.githubusercontent.com/dwg255/fish/master/client/2.jpg)
+![](https://raw.githubusercontent.com/dwg255/fish/master/client/3.jpg)
+![](https://raw.githubusercontent.com/dwg255/fish/master/client/4.jpg)
+![](https://raw.githubusercontent.com/dwg255/fish/master/client/5.jpg)
+![](https://raw.githubusercontent.com/dwg255/fish/master/client/6.jpg)
